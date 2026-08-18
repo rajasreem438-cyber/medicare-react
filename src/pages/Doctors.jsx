@@ -36,7 +36,8 @@ function Doctors() {
               <div className="card shadow h-100">
 
                 <img
-                  src={`https://medicare-hospital-zauc.onrender.com/${doctor.image}`}
+                  
+                 src={`https://medicare-hospital-zauc.onrender.com${doctor.image}`}
                   className="card-img-top"
                   alt={doctor.name}
                   style={{
