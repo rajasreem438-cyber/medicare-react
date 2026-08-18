@@ -9,6 +9,8 @@ function Doctors() {
     API.get("/api/doctors/")
       .then((response) => {
         console.log("Doctors:", response.data);
+        console.log("First image:", response.data[0]?.image);
+
         setDoctors(response.data);
         setLoading(false);
       })
@@ -26,23 +28,37 @@ function Doctors() {
       </h2>
 
       {loading ? (
-        <p className="text-center">Loading doctors...</p>
+        <p className="text-center">
+          Loading doctors...
+        </p>
+      ) : doctors.length === 0 ? (
+        <p className="text-center">
+          No doctors found.
+        </p>
       ) : (
         <div className="row">
 
           {doctors.map((doctor) => (
-            <div className="col-md-6 col-lg-3 mb-4" key={doctor.id}>
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              key={doctor.id}
+            >
 
               <div className="card shadow h-100">
 
                 <img
-                  
-                 src={`https://medicare-hospital-zauc.onrender.com${doctor.image}`}
+                  src={`https://medicare-hospital-zauc.onrender.com${doctor.image}`}
                   className="card-img-top"
                   alt={doctor.name}
                   style={{
                     height: "250px",
                     objectFit: "cover",
+                  }}
+                  onError={(e) => {
+                    console.log(
+                      "Image failed:",
+                      `https://medicare-hospital-zauc.onrender.com${doctor.image}`
+                    );
                   }}
                 />
 
